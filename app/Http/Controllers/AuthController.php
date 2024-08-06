@@ -5,23 +5,35 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     //
-    public function funLogin(Request $request){
+    public function funLogin(Request $request)
+    {
         //validar
         $credenciales = $request->validate([
-            "email"=> "required|email",
-            "password"=> "required"
+            "email" => "required|email",
+            "password" => "required"
         ]);
-        if (!Auth::attempt($credenciales)){
-
+        // Autenticamos
+        if (!Auth::attempt($credenciales)) {
+            return response()->json(["message" => "Credenciales Incorrectas"]);
         }
-
+        // Obtener el usuario autencicado
+        $usuario = $request->user();
+        // Generamos token
+        $token = $usuario->createToken('Token auth')->plainTextToken;
+        // Respondemos
+        return response()->json([
+            "access_token" => $token,
+            "usuario" => $usuario
+        ], 201);
     }
 
-    public function funRegister(Request $request){
+    public function funRegister(Request $request)
+    {
         //validar
         $request->validate([
             "name" => "required|string",
@@ -34,19 +46,25 @@ class AuthController extends Controller
         $usuario = new User();
         $usuario->name = $request->name;
         $usuario->email = $request->email;
-        $usuario->password = $request->password;
+        $usuario->password = Hash::make ($request->password);
         $usuario->save();
 
-        //generar una respuesta
-        return response()->json(["mensaje"=>"Usuario Registrado"], 201);
+        // Verificación de cuenta por correo
 
+        //generar una respuesta
+        return response()->json(["mensaje" => "Usuario Registrado"], 201);
     }
 
-    public function funProfile (Request $request){
+    public function funProfile(Request $request){
+        // Obtener el usuario autencicado
+        $usuario = $request->user();
 
+        return response()->json($usuario);
     }
 
     public function funLogout(Request $request){
+        $request->user()->tokens()->delete();
 
+        return response()->json(["message"=>"Logout"]);
     }
 }
