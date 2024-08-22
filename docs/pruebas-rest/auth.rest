@@ -4,10 +4,10 @@ Accept: application/json
 Content-Type: application/json
 
 {
-	"name": "maria",
-	"email": "maria@mail.com",
-	"password": "maria54321",
-	"c_password": "maria54321"
+	"name": "cristian",
+	"email": "cristian@mail.com",
+	"password": "cristian54321",
+	"c_password": "cristian54321"
 }
 
 ### Autenticacion  (login)
@@ -16,8 +16,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "email": "kelly@mail.com",
-	"password": "kelly54321"
+    "email": "admin@mail.com",
+	"password": "admin54321"
 }
 
 ### Perfil
