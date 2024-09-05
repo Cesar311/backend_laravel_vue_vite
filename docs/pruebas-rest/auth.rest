@@ -23,14 +23,14 @@ Content-Type: application/json
 ### Perfil
 GET http://127.0.0.1:8000/api/v1/auth/profile
 Accept: application/json
-Authorization: Bearer 3|4pXDTGFL98QQYbpu6F7DeDXIIQvXYmGZ5XgvEcp201f78542
+Authorization: Bearer 28|kN2aAoOBuD62wL9amconmSleb9hRLn6eBu6QG00O97b5e159
 
 ### Salir
 POST http://127.0.0.1:8000/api/v1/auth/logout
 Accept: application/json
-Authorization: Bearer 3|4pXDTGFL98QQYbpu6F7DeDXIIQvXYmGZ5XgvEcp201f78542
+Authorization: Bearer 28|kN2aAoOBuD62wL9amconmSleb9hRLn6eBu6QG00O97b5e159
 
 ### resent verification email
 GET http://127.0.0.1:8000/api/email/resend
 Accept: application/json
-Authorization: Bearer 7|IlR8kT92SuoeIWuCyvdMv99R6zeSeL6byh6g344l97b02c7e
+Authorization: Bearer 28|kN2aAoOBuD62wL9amconmSleb9hRLn6eBu6QG00O97b5e159

@@ -1,11 +1,10 @@
 GET http://127.0.0.1:8000/api/usuario
-Authorization: Bearer 12|PaIQnaRxn3BCyMSwNUbyjcv8kSNckKKl8GBQFc57b6a673c1
-
+Authorization: Bearer 28|kN2aAoOBuD62wL9amconmSleb9hRLn6eBu6QG00O97b5e159
 ### Guardar Usuario
 POST http://127.0.0.1:8000/api/usuario
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 12|PaIQnaRxn3BCyMSwNUbyjcv8kSNckKKl8GBQFc57b6a673c1
+Authorization: Bearer 28|kN2aAoOBuD62wL9amconmSleb9hRLn6eBu6QG00O97b5e159
 
 {
     "name": "Ana",
@@ -14,13 +13,16 @@ Authorization: Bearer 12|PaIQnaRxn3BCyMSwNUbyjcv8kSNckKKl8GBQFc57b6a673c1
 }
 
 ### mostrar
-GET http://127.0.0.1:8000/api/usuario/2
+GET http://127.0.0.1:8000/api/usuario/7
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 28|kN2aAoOBuD62wL9amconmSleb9hRLn6eBu6QG00O97b5e159
 
 ### Modificar
 PUT http://127.0.0.1:8000/api/usuario/5
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 12|PaIQnaRxn3BCyMSwNUbyjcv8kSNckKKl8GBQFc57b6a673c1
+Authorization: Bearer 28|kN2aAoOBuD62wL9amconmSleb9hRLn6eBu6QG00O97b5e159
 
 {
     "name": "Pedro",
