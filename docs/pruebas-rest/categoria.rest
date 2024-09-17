@@ -1,0 +1,17 @@
+GET http://127.0.0.1:8000/api/categoria
+Authorization: Bearer 13|Y7TO3pQYkhhkJTBYP4br5onLoksZTG0bGeNk7bGLdb1f7e68
+
+### guardar categoria
+
+POST http://127.0.0.1:8000/api/categoria
+Authorization: Bearer 13|Y7TO3pQYkhhkJTBYP4br5onLoksZTG0bGeNk7bGLdb1f7e68
+Content-Type: application/json
+
+{
+    "nombre": "ROPA",
+    "detalle": "Muebles para oficinas"
+}
+
+### mostrar
+GET http://127.0.0.1:8000/api/categoria/1
+Authorization: 13|Y7TO3pQYkhhkJTBYP4br5onLoksZTG0bGeNk7bGLdb1f7e68

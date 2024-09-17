@@ -1,0 +1,2 @@
+GET http://127.0.0.1:8000/api/producto?page=1&limit=15
+Authorization: Bearer 13|Y7TO3pQYkhhkJTBYP4br5onLoksZTG0bGeNk7bGLdb1f7e68
