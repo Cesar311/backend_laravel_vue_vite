@@ -1,13 +1,13 @@
 ### listar
 GET http://127.0.0.1:8000/api/producto
 Accept: application/json
-Authorization: Bearer 8|isTEUCt58XfRi1mbCMbr6Jley9pTPBNjacekMdG9af66e0d5
+Authorization: Bearer 4|GCSQ0UV3CIJ4bvNS7ql0FdJs2GXJe76oghIEi6x95b504f66
 
 ### Guardar producto
 POST http://127.0.0.1:8000/api/producto
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer 15|Lt3CIWPkptDzu3MGv2W80Y26UDnNO9T5A8dkNSK0c86fb0b4
+Authorization: Bearer 4|GCSQ0UV3CIJ4bvNS7ql0FdJs2GXJe76oghIEi6x95b504f66
 
 {
     "nombre": "Laptop",

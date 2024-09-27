@@ -12,22 +12,22 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
+use App\Models\User;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::prefix('/v1/auth')->group(function () {
+Route::prefix('/v1/auth')->group(function(){
 
     Route::post('/login', [AuthController::class, "funLogin"]);
     Route::post('/register', [AuthController::class, "funRegister"]);
 
-    Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware('auth:sanctum')->group(function(){
         Route::get('/profile', [AuthController::class, "funProfile"]);
         Route::post('/logout', [AuthController::class, "funLogout"]);
     });
 });
-
 
 Route::post('reset-password', [ResetPasswordController::class, "resetPassword"]);
 Route::post('change-password', [ResetPasswordController::class, "changePassword"]);
@@ -35,14 +35,27 @@ Route::post('change-password', [ResetPasswordController::class, "changePassword"
 Route::get('email/verify/{id}', [AuthController::class, 'verify'])->name('verification.verify');
 Route::get('email/resend', [AuthController::class, "resend"])->name("verification.resend")->middleware('auth:sanctum');
 
-Route::middleware('auth:sanctum')->group(function () {
+// pruebas seeder
+Route::get("datos", function(){
+    $user = User::find(8);
+    return $user->permisos;
+});
+
+Route::get("valor-siguiente", [PersonaController::class, "guardarValorSiguiente"]);
+
+Route::middleware('auth:sanctum')->group(function(){
+
+    Route::get("producto/excel", [ProductoController::class, "exportarExcel"]);
+    Route::get("pedido/{id}/reporte-pdf", [PedidoController::class, "reportePedidoPDF"]);
+
+    Route::get("/cliente/buscar", [ClienteController::class, "funBuscar"]);
 
     Route::post("/usuario/asignar-persona", [UsuarioController::class, "asignarPersona"]);
 
-    // Subida de Imagen
+    // subida de imagen
     Route::post("producto/{id}/upload-image", [ProductoController::class, "updateImage"]);
 
-    // Controlador de recursos (API)
+    // controlador de recursos (API)
     Route::apiResource("usuario", UsuarioController::class);
     Route::apiResource("persona", PersonaController::class);
 
@@ -53,10 +66,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource("permiso", PermisoController::class);
     Route::apiResource("role", RoleController::class);
 
-
-
 });
 
-Route::get("/no-autorizado", function () {
-    return response()->json(["message" => "No estas autorizado para ver esta página"], 401);
+Route::get("/no-autorizado", function (){
+    return response()->json(["message" => "No esta autorizado para ver esta pagina"], 401);
 })->name("login");

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contador;
 use App\Models\Persona;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,15 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        $persona = Persona::with('user')->get();
+        $personas = Persona::with('user')->get();
 
-        return response()->json($persona, 200);
+        return response()->json($personas, 200);
+    }
+
+    public function guardarValorSiguiente(Request $request){
+        $nombre = $request->nombre;
+        $valorsiguiente = Contador::obtenerSiguienteValor($nombre);
+        return $valorsiguiente;
     }
 
     /**

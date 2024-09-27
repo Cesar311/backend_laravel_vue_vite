@@ -13,7 +13,7 @@ class Persona extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function documento(){
+    public function documentos(){
         return $this->hasMany(Documento::class);
     }
 }

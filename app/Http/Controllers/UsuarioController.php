@@ -14,12 +14,12 @@ class UsuarioController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   // El modelo User esta asociado a la tabla users
-        $usuarios = User::with('persona', 'roles')->get(); // Select * from users
+    {   // el modelo User esta asociado a la tabla users
+        $usuarios = User::with('persona', 'roles')->get(); // select * from users
 
-        // DB::select("");
+        //DB::select("");
 
-        // $table_pívot = DB::table("role_user")->join ('users', 'user.id', "role_user.user_id")->where("user_id", "=", 2)->get();
+        // $tabla_pivot = DB::table("role_user")->join('users', 'users.id', "role_user.user_id")->where("user_id", "=", 2)->count();
 
         return response()->json($usuarios, 200);
     }
@@ -29,9 +29,10 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioRequest $request)
     {
-        // $nombre = "admin' or 1=1"; //request-name
+        // $nombre = "admin' or 1=1";// $request->name;
         // DB::insert("insert into users (name, email) values(?, ?)", [$nombre, $request->email]);
-        /* $request->validate([
+        /*
+        $request->validate([
             "name" => "required",
             "email" => "required|email|unique:users",
             "password" => "required"
@@ -39,13 +40,13 @@ class UsuarioController extends Controller
         */
 
         $usuario = new User();
-        $usuario -> name = $request->name;
-        $usuario -> email = $request->email;
-        $usuario -> password = $request->password;
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->password = $request->password;
         $usuario->save();
 
-        return response()->json(["message"=>"Usuario registrado correctamente"]);
 
+        return response()->json(["message" => "Usuario registrado correctamente"]);
     }
 
     /**
@@ -54,6 +55,7 @@ class UsuarioController extends Controller
     public function show(string $id)
     {
         $usuario = User::find($id);
+
         return response()->json($usuario);
     }
 
@@ -62,6 +64,7 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
         $request->validate([
             "name" => "required",
             "email" => "required|email|unique:users,email,$id",
@@ -69,12 +72,12 @@ class UsuarioController extends Controller
         ]);
 
         $usuario = User::find($id);
-        $usuario -> name = $request->name;
-        $usuario -> email = $request->email;
-        $usuario -> password = $request->password;
-        $usuario -> update();
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->password = $request->password;
+        $usuario->update();
 
-        return response()->json(["message"=> "Usuario actualizado"]);
+        return response()->json(["message" => "Usuario actualizado"]);
     }
 
     /**
@@ -83,18 +86,18 @@ class UsuarioController extends Controller
     public function destroy(string $id)
     {
         $usuario = User::find($id);
-        $usuario ->delete();
-        return response()->json(["message"=> "Usuario eliminado"]);
+        $usuario->delete();
+        return response()->json(["message" => "Usuario eliminado"]);
+
     }
 
     public function asignarPersona(Request $request){
 
         $request->validate([
-            "nombres" =>"required|max:50|min:2",
-            "apellidos" =>"required|max:50|min:2",
-            "fecha_nac" =>"required",
-            "user_id" =>"required",
-
+            "nombres" => "required|max:50|min:2",
+            "apellidos" => "required|max:50|min:2",
+            "fecha_nac" => "required",
+            "user_id" => "required"
         ]);
 
         $user_id = $request->user_id;
@@ -109,5 +112,6 @@ class UsuarioController extends Controller
         $persona->save();
 
         return response()->json(["mensaje" => "Persona Asignada a cuenta de Usuario"]);
+
     }
 }

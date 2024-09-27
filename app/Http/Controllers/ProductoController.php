@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductoExport;
 use App\Models\Producto;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class ProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         Gate::authorize(("index_producto"));
 
@@ -116,6 +119,7 @@ class ProductoController extends Controller
         $producto->update();
 
         return response()->json(["message" => "Producto Inactivo"], 200);
+
     }
 
     function updateImage(Request $request, $id){

@@ -16,7 +16,7 @@ class ResetPasswordController extends Controller
     public function resetPassword(Request $request)
     {
         $request->validate([
-            "email" => "required|email|exists:users",
+            "email" => "required|email|exists:users"
         ]);
 
 
@@ -27,7 +27,7 @@ class ResetPasswordController extends Controller
             $message->subject('Recuperar Contraseña');
         });
         return response()->json(["mensaje" => "enviamos un correo con todas las instrucciones"]);
-        **/
+        */
 
         $status = Password::sendResetLink(
             $request->only("email")
@@ -55,15 +55,14 @@ class ResetPasswordController extends Controller
 
                 $user->save();
 
-                event (new PasswordReset($user));
-
+                event(new PasswordReset($user));
             }
         );
 
-        if($status === Password::PASSWORD_RESET){
+        if($status === Password::PASSWORD_RESET) {
             return response(["message" => "La contraseña ha sido modificada!!!"]);
         }
 
-        return response(["message"=>__($status)], 500);
+        return response(["message" => __($status)], 500);
     }
 }

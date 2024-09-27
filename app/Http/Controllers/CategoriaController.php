@@ -14,7 +14,7 @@ class CategoriaController extends Controller
     {
         $categorias = Categoria::get();
 
-        return response()->json($categorias,200);
+        return response()->json($categorias, 200);
     }
 
     /**
@@ -22,12 +22,12 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        // Validar
+        // validar
         $request->validate([
-            "nombre"=>"required|unique:categorias"
+            "nombre" => "required|unique:categorias"
         ]);
 
-        // Guardar
+        // guardar
         $categoria = new Categoria();
         $categoria->nombre = $request->nombre;
         $categoria->detalle = $request->detalle;
@@ -44,6 +44,7 @@ class CategoriaController extends Controller
     {
         $categoria = Categoria::findOrFail($id);
         return response()->json($categoria, 200);
+
     }
 
     /**
@@ -52,7 +53,7 @@ class CategoriaController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            "nombre"=>"required"
+            "nombre" => "required"
         ]);
 
         $categoria = Categoria::findOrFail($id);

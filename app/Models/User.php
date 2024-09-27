@@ -14,7 +14,8 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, HasApiTokens;
 
-    protected $table = 'users';
+    // protected $table = 'usuarios';
+
 
     /**
      * The attributes that are mass assignable.
@@ -53,14 +54,19 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendPasswordResetNotification($token)
     {
         $url_frontend = "http://localhost:5173/reset-password?token=".$token;
-        $this->notify(new ResetPasswordNotification($url_frontend ));
+        $this->notify(new ResetPasswordNotification($url_frontend));
     }
 
-    public function persona() {
+    public function persona(){
         return $this->hasOne(Persona::class);
     }
 
     public function roles(){
         return $this->belongsToMany(Role::class)->withTimestamps();
     }
+
+    public function permisos(){
+        return $this->roles->map->permisos->flatten()->pluck("nombre")->unique();
+    }
+
 }
