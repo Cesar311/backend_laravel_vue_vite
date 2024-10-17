@@ -6,6 +6,7 @@ use App\Models\Pedido;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PedidoController extends Controller
 {
@@ -68,9 +69,9 @@ class PedidoController extends Controller
 
         $pedido = Pedido::with(['cliente', 'productos'])->find($id);
 
-        //$pdf = Pdf::loadView('pdf.recibo', ["pedido" => $pedido]);
+        $pdf = Pdf::loadView('pdf.recibo', ["pedido" => $pedido]);
         // return $pdf->download('recibo.pdf');
-        //return $pdf->stream('recibo.pdf'); // download('recibo.pdf');
+        return $pdf->stream('recibo.pdf'); // download('recibo.pdf');
     }
 
     /**

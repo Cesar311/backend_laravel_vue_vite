@@ -139,7 +139,7 @@ class ProductoController extends Controller
         }
     }
 
-    //public function exportarExcel(){
-    //    return Excel::download(new ProductoExport, 'producto.xlsx');
-    //}
+    public function exportarExcel(){
+        return Excel::download(new ProductoExport, 'producto.xlsx');
+    }
 }

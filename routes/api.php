@@ -37,7 +37,7 @@ Route::get('email/resend', [AuthController::class, "resend"])->name("verificatio
 
 // pruebas seeder
 Route::get("datos", function(){
-    $user = User::find(8);
+    $user = User::find(6);
     return $user->permisos;
 });
 
